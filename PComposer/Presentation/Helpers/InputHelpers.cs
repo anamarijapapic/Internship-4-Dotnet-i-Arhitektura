@@ -37,5 +37,24 @@ namespace Presentation.Helpers
                 return input.Any(char.IsDigit) && input.Split(' ').Length > 1;
             return false;
         }
+
+        public static int InputNumberChoice(int minValue, int maxValue)
+        {
+            int input;
+            bool tryParseSuccess;
+
+            do
+            {
+                Console.WriteLine("\nUnesite svoj odabir:");
+
+                tryParseSuccess = int.TryParse(Console.ReadLine().Trim(), out input);
+
+                if (tryParseSuccess && input >= minValue && input <= maxValue) break;
+
+                Console.WriteLine("Neispravan unos!");
+            } while (!tryParseSuccess || input < minValue || input > maxValue);
+
+            return input;
+        }
     }
 }
