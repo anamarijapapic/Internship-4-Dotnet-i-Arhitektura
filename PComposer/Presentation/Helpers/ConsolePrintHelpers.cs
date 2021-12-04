@@ -18,5 +18,20 @@ namespace Presentation.Helpers
                             + "| 0 - Odjavi se                      |\n"
                             + "+------------------------------------+");
         }
+
+        public static void PrintAssembleComputer()
+        {
+            Console.WriteLine("+----------------------------------------+\n"
+                            + "| Odabir komponenti za slaganje racunala |\n"
+                            + "+----------------------------------------+");
+        }
+
+        public static void PrintContinue()
+        {
+            Console.WriteLine("+----------------------------------------+\n"
+                            + "| Pritisnite bilo koju tipku za nastavak |\n"
+                            + "+----------------------------------------+");
+            Console.ReadKey();
+        }
     }
 }

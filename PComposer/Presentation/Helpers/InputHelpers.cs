@@ -34,7 +34,7 @@ namespace Presentation.Helpers
             if (inputType == "Ime" || inputType == "Prezime")
                 return input.Length >= 1 && Regex.Match(input, "^[A-Z- ĆČŠĐŠŽ][a-zA-Z- ćčđšž]*$").Success;
             else if (inputType == "Adresa")
-                return input.Any(char.IsDigit) && input.Split(' ').Length > 1;
+                return input.Any(char.IsDigit) && input.Any(char.IsLetter) && input.Split(' ').Length > 1;
             return false;
         }
 

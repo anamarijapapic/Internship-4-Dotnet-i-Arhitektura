@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Presentation.Enums;
+using System;
 
 namespace Presentation
 {
@@ -27,22 +28,57 @@ namespace Presentation
         {
             Helpers.ConsolePrintHelpers.PrintMainMenu();
 
-            var userMenuChoice = (Enums.MainMenuOptions)Helpers.InputHelpers.InputNumberChoice(0, 2);
+            var userChoice = (MainMenuOptions)Helpers.InputHelpers.InputNumberChoice(0, 2);
 
             Console.Clear();
 
-            switch (userMenuChoice)
+            switch (userChoice)
             {
-                case Enums.MainMenuOptions.AssembleAndOrder:
-                    // AssembleAndOrder();
+                case MainMenuOptions.AssembleAndOrder:
+                    AssembleComputer();
+                    // ChooseShipmentMethod();
+                    // ContinueToCartOrAssembleNew();
+                    // ChooseDiscount();
+                    // ConfirmOrderOrAssembleNew();
                     break;
-                case Enums.MainMenuOptions.ShowOrderHistory:
+                case MainMenuOptions.ShowOrderHistory:
                     // ShowOrderHistory();
                     break;
-                case Enums.MainMenuOptions.Logout:
+                case MainMenuOptions.Logout:
                     Console.WriteLine($"Pozdrav, {Domain.Domain.CurrentUser.Name} {Domain.Domain.CurrentUser.Surname}!\nUspjesno ste odjavljeni!");
                     break;
             }
+        }
+
+        static void AssembleComputer()
+        {
+            Helpers.ConsolePrintHelpers.PrintAssembleComputer();
+
+            foreach (var option in (SubmenuAssembleOptions[])Enum.GetValues(typeof(SubmenuAssembleOptions)))
+            {
+                Console.WriteLine($"\nPonuda {option}:\n");
+                switch (option)
+                {
+                    case SubmenuAssembleOptions.Processor:
+                        Helpers.ChooseComponentHelpers.ChooseProcessor();
+                        break;
+                    case SubmenuAssembleOptions.RAM:
+                        Helpers.ChooseComponentHelpers.ChooseRAM();
+                        break;
+                    case SubmenuAssembleOptions.HardDisk:
+                        Helpers.ChooseComponentHelpers.ChooseHardDisk();
+                        break;
+                    case SubmenuAssembleOptions.Case:
+                        Helpers.ChooseComponentHelpers.ChooseCase();
+                        break;
+                }
+            }
+
+            Domain.Domain.Computer.CalculatePrices();
+
+            Console.WriteLine($"{Domain.Domain.Computer}");
+            Console.WriteLine("\nHvala! Sve komponente za sastavljanje ovog racunala su zabiljezene.");
+            Helpers.ConsolePrintHelpers.PrintContinue();
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Data.Entities;
+using System;
 
 namespace Domain
 {
     public class Domain
     {
-        public static Data.Entities.User CurrentUser;
+        public static User CurrentUser;
+        public static Computer Computer = new();
     }
 }
