@@ -9,24 +9,29 @@ namespace Data.Entities
     public class Receipt
     {
         public int ReceiptNumber;
+        public DateTime DateTimeOfReceipt;
         public User User;
         public Order Order;
         public float TotalPrice;
+        public float ShippingPrice;
 
         public Receipt(Order order, User user)
         {
             Random randomNumber = new Random(DateTime.Now.Millisecond);
             ReceiptNumber = randomNumber.Next(10000, 99999);
+            DateTimeOfReceipt = DateTime.Now;
             User = user;
             Order = order;
             TotalPrice = order.TotalOrderPrice;
+            ShippingPrice = order.ShippingPrice;
         }
 
         public override string ToString()
         {
-            return $"\nVas racun:\n\nBroj racuna: {ReceiptNumber}\n\nKupac:\n{User}\n{Order}" +
+            return $"\nVas racun:\n\nBroj racuna: {ReceiptNumber}\nVrijeme racuna: {DateTimeOfReceipt}\n\nKupac:\n{User}\n{Order}" +
                 $"\n-------------------------------------------------------------------" +
-                $"\nUkupna cijena: {TotalPrice} kn\n";
+                $"\nUkupna cijena: {TotalPrice} kn + dostava {ShippingPrice} kn" +
+                $"\nZbroj: {TotalPrice + ShippingPrice} kn\n";
         }
     }
 }

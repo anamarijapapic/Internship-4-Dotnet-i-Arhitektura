@@ -55,7 +55,7 @@ namespace Presentation
                     ConfirmOrderOrAssembleNew();
                     break;
                 case MainMenuOptions.ShowOrderHistory:
-                    // ShowOrderHistory();
+                    ShowOrderHistory();
                     break;
                 case MainMenuOptions.Logout:
                     Console.WriteLine($"Pozdrav, {Domain.Domain.CurrentUser.Name} {Domain.Domain.CurrentUser.Surname}!\nUspjesno ste odjavljeni!");
@@ -131,8 +131,10 @@ namespace Presentation
             {
                 case SubmenuConfirmOrderOptions.ConfirmOrder:
                     Domain.AccessData.SetData.AddReceipt(Domain.Domain.Order, Domain.Domain.CurrentUser);
+                    Domain.AccessData.SetData.AddReceiptToOrderHistory(Domain.Domain.Receipt);
                     Helpers.ConsolePrintHelpers.ThankYou();
                     Console.WriteLine(Domain.Domain.Receipt);
+                    Domain.Domain.Order = new();
                     Helpers.ConsolePrintHelpers.PrintReturnToMainMenu();
                     MainMenu();
                     break;
@@ -145,6 +147,27 @@ namespace Presentation
                     MainMenu();
                     break;
             }
+        }
+
+        static void ShowOrderHistory()
+        {
+            Helpers.ConsolePrintHelpers.PrintOrderHistory();
+
+            if (Domain.Domain.OrderHistory.History.Count < 1)
+            {
+                Console.WriteLine("\nNazalost, jos uvijek niste napravili nijednu narudzbu!\n");
+            }
+            else
+            {
+                foreach (var receipt in Domain.Domain.OrderHistory.History)
+                {
+                    Console.WriteLine($"\n\nNarudzba dana {receipt.DateTimeOfReceipt}:\n{receipt}");
+                }
+            }
+            
+            Helpers.ConsolePrintHelpers.PrintReturnToMainMenu();
+
+            MainMenu();
         }
     }
 }

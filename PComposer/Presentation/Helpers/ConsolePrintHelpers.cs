@@ -80,5 +80,12 @@ namespace Presentation.Helpers
                             + "+--------------------------------------------------------+");
             Console.ReadKey();
         }
+
+        public static void PrintOrderHistory()
+        {
+            Console.WriteLine("+-------------------------------+\n"
+                            + "| Prikaz mojih proslih narudzbi |\n"
+                            + "+-------------------------------+");
+        }
     }
 }

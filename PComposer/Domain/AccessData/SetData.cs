@@ -53,5 +53,10 @@ namespace Domain.AccessData
         {
             Domain.Receipt = new(order, user);
         }
+
+        public static void AddReceiptToOrderHistory(Receipt receipt)
+        {
+            Domain.OrderHistory.History.Add(receipt);
+        }
     }
 }
