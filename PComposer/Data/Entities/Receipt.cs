@@ -14,6 +14,7 @@ namespace Data.Entities
         public Order Order;
         public float TotalPrice;
         public float ShippingPrice;
+        public int DiscountPercent;
 
         public Receipt(Order order, User user)
         {
@@ -24,6 +25,7 @@ namespace Data.Entities
             Order = order;
             TotalPrice = order.TotalOrderPrice;
             ShippingPrice = order.ShippingPrice;
+            DiscountPercent = order.DiscountPercent;
         }
 
         public override string ToString()
@@ -31,7 +33,9 @@ namespace Data.Entities
             return $"\nVas racun:\n\nBroj racuna: {ReceiptNumber}\nVrijeme racuna: {DateTimeOfReceipt}\n\nKupac:\n{User}\n{Order}" +
                 $"\n-------------------------------------------------------------------" +
                 $"\nUkupna cijena: {TotalPrice} kn + dostava {ShippingPrice} kn" +
-                $"\nZbroj: {TotalPrice + ShippingPrice} kn\n";
+                $"\nZbroj: {TotalPrice + ShippingPrice} kn\n" +
+                $"\nPopust: {DiscountPercent}% = {(TotalPrice + ShippingPrice) * DiscountPercent / 100} kn" +
+                $"\nZbroj s uracunatim popustom: {TotalPrice + ShippingPrice - ((TotalPrice + ShippingPrice) * DiscountPercent / 100)} kn\n";
         }
     }
 }

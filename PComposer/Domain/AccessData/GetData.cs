@@ -72,5 +72,17 @@ namespace Domain.AccessData
 
             return cases;
         }
+
+        public static Dictionary<string, int> GetPromoCodes()
+        {
+            var promoCodes = new Dictionary<string, int>();
+
+            foreach (var promoCode in Data.Seed.PromoCodes)
+            {
+                promoCodes.Add(promoCode.Key, promoCode.Value);
+            }
+
+            return promoCodes;
+        }
     }
 }

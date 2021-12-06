@@ -62,5 +62,30 @@ namespace Presentation.Helpers
             Helpers.ConsolePrintHelpers.PrintAssembleNewChoice();
             return InputNumberChoice(0, 1) == 1;
         }
+
+        public static string InputPromoCode(Dictionary<string, int> promoCodes)
+        {
+            string input;
+            bool isInputValid;
+
+            do
+            {
+                Console.WriteLine("\nUnesite promo kod:");
+
+                input = Console.ReadLine().Trim().ToUpper();
+                isInputValid = ValidatePromoCode(promoCodes, input);
+
+                if (isInputValid) break;
+
+                Console.WriteLine("Kod za popust nije valjan!");
+            } while (!isInputValid);                    
+
+            return input;
+        }
+
+        public static bool ValidatePromoCode(Dictionary<string, int> promoCodes, string promoCode)
+        {
+            return promoCodes.Keys.Contains(promoCode);
+        }
     }
 }

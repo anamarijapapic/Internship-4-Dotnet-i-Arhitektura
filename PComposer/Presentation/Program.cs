@@ -105,7 +105,7 @@ namespace Presentation
             Helpers.ConsolePrintHelpers.PrintDiscountSubmenu();
 
             var userChoice = (SubmenuDiscountOptions)Helpers.InputHelpers.InputNumberChoice(0, 2);
-
+            string promoCode;
             switch (userChoice)
             {
                 case SubmenuDiscountOptions.Loyalty:
@@ -113,6 +113,10 @@ namespace Presentation
                 case SubmenuDiscountOptions.Quantity:
                     break;
                 case SubmenuDiscountOptions.PromoCode:
+                    var promoCodes = Domain.AccessData.GetData.GetPromoCodes();
+                    promoCode = Helpers.InputHelpers.InputPromoCode(promoCodes);
+                    Domain.AccessData.SetData.AddDiscountPromoCodes(promoCodes, promoCode);
+                    Domain.AccessData.SetData.DeleteDiscountPromoCode(promoCode);
                     break;
             }
 

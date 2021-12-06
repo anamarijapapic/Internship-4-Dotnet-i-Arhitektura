@@ -15,6 +15,7 @@ namespace Data.Entities
         public float TotalAssemblyPrice = 0;
         public float TotalOrderPrice = 0;
         public float ShippingPrice = 0;
+        public int DiscountPercent;
         public string Vehicle = "osobno preuzimanje";
 
         public Order()
