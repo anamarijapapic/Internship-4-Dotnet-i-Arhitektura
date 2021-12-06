@@ -34,5 +34,14 @@ namespace Domain.AccessData
         {
             Domain.Computer.Case = computerCase;
         }
+
+        public static void AddComputerToOrder(Computer computer)
+        {
+            Domain.Order.Computers.Add(computer);
+            Domain.Order.TotalWeight += computer.Weight;
+            Domain.Order.TotalOrderPrice += computer.TotalPrice;
+            Domain.Order.TotalComponentsPrice += computer.ComponentsPrice;
+            Domain.Order.TotalAssemblyPrice += computer.AssemblyPrice;
+        }
     }
 }

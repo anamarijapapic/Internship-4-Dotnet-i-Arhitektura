@@ -56,5 +56,11 @@ namespace Presentation.Helpers
 
             return input;
         }
+
+        public static bool AssembleNewComputer()
+        {
+            Helpers.ConsolePrintHelpers.PrintAssembleNewChoice();
+            return InputNumberChoice(0, 1) == 1;
+        }
     }
 }

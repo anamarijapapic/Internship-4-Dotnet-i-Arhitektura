@@ -57,7 +57,7 @@ namespace Domain.AccessData
             return hardDisks;
         }
 
-        public static Dictionary<int, Data.Entities.Case> GetCases()
+        public static Dictionary<int, Case> GetCases()
         {
             var cases = new Dictionary<int, Case>();
             int i = 0;

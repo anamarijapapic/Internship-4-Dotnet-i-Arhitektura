@@ -33,5 +33,23 @@ namespace Presentation.Helpers
                             + "+----------------------------------------+");
             Console.ReadKey();
         }
+
+        public static void PrintAssembleNewChoice()
+        {
+            Console.WriteLine("\n+--- Odaberite opciju za nastavak ---+\n"
+                              + "| 0 - Nastavi s kupnjom              |\n"
+                              + "| 1 - Sastavi novi PC                |\n"
+                              + "+------------------------------------+");
+        }
+
+        public static void PrintShipmentMethod()
+        {
+            Console.Clear();
+
+            Console.WriteLine("+----Odabir nacina preuzimanja paketa----+\n"
+                            + "| 0 - Osobno preuzimanje (besplatno)     |\n"
+                            + "| 1 - Dostava na adresu                  |\n"
+                            + "+----------------------------------------+");
+        }
     }
 }

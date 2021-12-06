@@ -22,6 +22,8 @@ namespace Presentation
             Domain.AccessData.SetData.LoginUser(name, surname, address);
             Console.Clear();
             Console.WriteLine($"Dobrodosli, {Domain.Domain.CurrentUser.Name} {Domain.Domain.CurrentUser.Surname}!\n");
+            Console.WriteLine(Domain.Domain.CurrentUser);
+            Helpers.ConsolePrintHelpers.PrintContinue();
         }
 
         static void MainMenu()
@@ -35,9 +37,11 @@ namespace Presentation
             switch (userChoice)
             {
                 case MainMenuOptions.AssembleAndOrder:
-                    AssembleComputer();
-                    // ChooseShipmentMethod();
-                    // ContinueToCartOrAssembleNew();
+                    do
+                    {
+                        AssembleComputer();
+                    } while (Helpers.InputHelpers.AssembleNewComputer());
+                    ChooseShipmentMethod();
                     // ChooseDiscount();
                     // ConfirmOrderOrAssembleNew();
                     break;
@@ -52,6 +56,8 @@ namespace Presentation
 
         static void AssembleComputer()
         {
+            Domain.Domain.Computer = new();
+
             Helpers.ConsolePrintHelpers.PrintAssembleComputer();
 
             foreach (var option in (SubmenuAssembleOptions[])Enum.GetValues(typeof(SubmenuAssembleOptions)))
@@ -76,8 +82,39 @@ namespace Presentation
 
             Domain.Domain.Computer.CalculatePrices();
 
-            Console.WriteLine($"{Domain.Domain.Computer}");
+            Domain.Domain.Computer.CalculateWeight();
+
+            Domain.AccessData.SetData.AddComputerToOrder(Domain.Domain.Computer);
+
             Console.WriteLine("\nHvala! Sve komponente za sastavljanje ovog racunala su zabiljezene.");
+
+            Helpers.ConsolePrintHelpers.PrintContinue();
+        }
+
+        static void ChooseShipmentMethod()
+        {
+            Helpers.ConsolePrintHelpers.PrintShipmentMethod();
+
+            var userChoice = (SubmenuShipmentOptions)Helpers.InputHelpers.InputNumberChoice(0, 1);
+
+            switch (userChoice)
+            {
+                case SubmenuShipmentOptions.None:
+                    break;
+                case SubmenuShipmentOptions.Shipping:
+                    Domain.Domain.Order.CalculateShippingPrice(Domain.Domain.CurrentUser.Distance);
+                    break;
+            }
+
+            Console.WriteLine($"\nVasa sastavljena racunala:");
+
+            for (int i = 0; i < Domain.Domain.Order.Computers.Count; i++)
+            {
+                Console.WriteLine($"\nRacunalo #{i + 1}:\n{Domain.Domain.Order.Computers[i]}");
+            }
+
+            Console.WriteLine($"{Domain.Domain.Order}");
+
             Helpers.ConsolePrintHelpers.PrintContinue();
         }
     }
