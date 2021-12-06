@@ -124,7 +124,7 @@ namespace Presentation
         }
 
         static void ChooseShipmentMethod()
-        {   
+        {
             Helpers.ConsolePrintHelpers.PrintShipmentMethod();
 
             var userChoice = (SubmenuShipmentOptions)Helpers.InputHelpers.InputNumberChoice(0, 1);
@@ -187,7 +187,7 @@ namespace Presentation
                     Console.WriteLine($"\n\nNarudzba dana {receipt.DateTimeOfReceipt}:\n{receipt}");
                 }
             }
-            
+
             Helpers.ConsolePrintHelpers.PrintReturnToMainMenu();
 
             MainMenu();

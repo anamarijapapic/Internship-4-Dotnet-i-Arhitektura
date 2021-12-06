@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Presentation.Enums
+﻿namespace Presentation.Enums
 {
     public enum MainMenuOptions
     {

@@ -1,9 +1,6 @@
 ﻿using Data.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.AccessData
 {
@@ -79,7 +76,7 @@ namespace Domain.AccessData
                 if (code.Key == promoCode)
                 {
                     Data.Seed.PromoCodes.Remove(code.Key);
-                }   
+                }
             }
         }
     }
