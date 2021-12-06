@@ -46,10 +46,39 @@ namespace Presentation.Helpers
         {
             Console.Clear();
 
-            Console.WriteLine("+----Odabir nacina preuzimanja paketa----+\n"
-                            + "| 0 - Osobno preuzimanje (besplatno)     |\n"
-                            + "| 1 - Dostava na adresu                  |\n"
-                            + "+----------------------------------------+");
+            Console.WriteLine("+---- Odabir nacina preuzimanja paketa ----+\n"
+                            + "| 0 - Osobno preuzimanje (besplatno)       |\n"
+                            + "| 1 - Dostava na adresu                    |\n"
+                            + "+------------------------------------------+");
+        }
+
+        public static void PrintConfirmOrder()
+        {
+            Console.Clear();
+
+            Console.WriteLine("+---- Odaberite opciju za nastavak ----+\n"
+                            + "| 0 - Dovrsi narudzbu i kupi           |\n"
+                            + "| 1 - Sastavi novi PC                  |\n"
+                            + "| 2 - Odustani od narudzbe             |\n"
+                            + "+--------------------------------------+");
+        }
+
+        public static void ThankYou()
+        {
+            Console.Clear();
+
+            Console.WriteLine("+------------------------------+\n"
+                            + "|   Narudzba je zaprimljena!   |\n"
+                            + "|   Hvala Vam na povjerenju!   |\n"
+                            + "+------------------------------+");
+        }
+
+        public static void PrintReturnToMainMenu()
+        {
+            Console.WriteLine("+--------------------------------------------------------+\n"
+                            + "| Pritisnite bilo koju tipku za povratak na pocetni menu |\n"
+                            + "+--------------------------------------------------------+");
+            Console.ReadKey();
         }
     }
 }

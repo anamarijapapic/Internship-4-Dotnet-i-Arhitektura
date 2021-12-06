@@ -15,14 +15,23 @@ namespace Presentation
         static void UserLogin()
         {
             Console.WriteLine("+--------------------------+\n| Logirajte se u PComposer |\n+--------------------------+");
+
             Console.WriteLine("\nUnesite svoje podatke:");
+
             var name = Helpers.InputHelpers.InputValue("Ime");
+
             var surname = Helpers.InputHelpers.InputValue("Prezime");
+
             var address = Helpers.InputHelpers.InputValue("Adresa");
+
             Domain.AccessData.SetData.LoginUser(name, surname, address);
+
             Console.Clear();
-            Console.WriteLine($"Dobrodosli, {Domain.Domain.CurrentUser.Name} {Domain.Domain.CurrentUser.Surname}!\n");
+
+            Console.WriteLine($"Dobrodosli, {Domain.Domain.CurrentUser.Name} {Domain.Domain.CurrentUser.Surname}!");
+
             Console.WriteLine(Domain.Domain.CurrentUser);
+
             Helpers.ConsolePrintHelpers.PrintContinue();
         }
 
@@ -43,7 +52,7 @@ namespace Presentation
                     } while (Helpers.InputHelpers.AssembleNewComputer());
                     ChooseShipmentMethod();
                     // ChooseDiscount();
-                    // ConfirmOrderOrAssembleNew();
+                    ConfirmOrderOrAssembleNew();
                     break;
                 case MainMenuOptions.ShowOrderHistory:
                     // ShowOrderHistory();
@@ -92,7 +101,7 @@ namespace Presentation
         }
 
         static void ChooseShipmentMethod()
-        {
+        {   
             Helpers.ConsolePrintHelpers.PrintShipmentMethod();
 
             var userChoice = (SubmenuShipmentOptions)Helpers.InputHelpers.InputNumberChoice(0, 1);
@@ -100,22 +109,42 @@ namespace Presentation
             switch (userChoice)
             {
                 case SubmenuShipmentOptions.None:
+                    Domain.AccessData.SetData.FixWeight(Domain.Domain.Computer);
                     break;
                 case SubmenuShipmentOptions.Shipping:
                     Domain.Domain.Order.CalculateShippingPrice(Domain.Domain.CurrentUser.Distance);
                     break;
             }
 
-            Console.WriteLine($"\nVasa sastavljena racunala:");
-
-            for (int i = 0; i < Domain.Domain.Order.Computers.Count; i++)
-            {
-                Console.WriteLine($"\nRacunalo #{i + 1}:\n{Domain.Domain.Order.Computers[i]}");
-            }
-
             Console.WriteLine($"{Domain.Domain.Order}");
 
             Helpers.ConsolePrintHelpers.PrintContinue();
+        }
+
+        static void ConfirmOrderOrAssembleNew()
+        {
+            Helpers.ConsolePrintHelpers.PrintConfirmOrder();
+
+            var userChoice = (SubmenuConfirmOrderOptions)Helpers.InputHelpers.InputNumberChoice(0, 2);
+
+            switch (userChoice)
+            {
+                case SubmenuConfirmOrderOptions.ConfirmOrder:
+                    Domain.AccessData.SetData.AddReceipt(Domain.Domain.Order, Domain.Domain.CurrentUser);
+                    Helpers.ConsolePrintHelpers.ThankYou();
+                    Console.WriteLine(Domain.Domain.Receipt);
+                    Helpers.ConsolePrintHelpers.PrintReturnToMainMenu();
+                    MainMenu();
+                    break;
+                case SubmenuConfirmOrderOptions.AssembleNew:
+                    AssembleComputer();
+                    ChooseShipmentMethod();
+                    ConfirmOrderOrAssembleNew();
+                    break;
+                case SubmenuConfirmOrderOptions.CancelOrder:
+                    MainMenu();
+                    break;
+            }
         }
     }
 }

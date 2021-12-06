@@ -23,6 +23,18 @@ namespace Data.Entities
             OrderNumber = randomNumber.Next(10000, 99999);
         }
 
+        public string PrintComputers()
+        {
+            string computersList = "";
+
+            for (int i = 0; i < Computers.Count; i++)
+            {
+                computersList += $"\n-------------\nRacunalo #{i + 1}:\n{Computers[i]}\n";
+            }
+
+            return computersList;
+        }
+
         public void CalculateShippingPrice(int distance)
         {
             if (TotalWeight < 3)
@@ -46,7 +58,9 @@ namespace Data.Entities
 
         public override string ToString()
         {
-            return $"\nBroj narudzbe: {OrderNumber}\nUkupna tezina narudzbe: {TotalWeight} kg\n" +
+            return $"\nBroj narudzbe: {OrderNumber}\n\nArtikli na racunu: {PrintComputers()}\n" +
+                $"-------------------------------------------------------------------\n" +
+                $"Ukupna tezina narudzbe (za racunala koja se dostavljaju): {TotalWeight} kg\n" +
                 $"Ukupna cijena svih racunala: {TotalOrderPrice} kn\nUkupna cijena svih komponenti za sva racunala: {TotalComponentsPrice} kn\n" +
                 $"Ukupna cijena sastavljanja svih komponenti za sva racunala: {TotalAssemblyPrice} kn\nCijena dostave: {ShippingPrice} kn ({Vehicle})\n";
         }

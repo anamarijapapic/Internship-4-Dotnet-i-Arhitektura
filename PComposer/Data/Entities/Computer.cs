@@ -48,6 +48,7 @@ namespace Data.Entities
         public override string ToString()
         {
             return $"\nProcesor: {Processor}\nRAM: {RAM}\t\tx{quantityOfRAM}\nHard disk: {HardDisk}\nKuciste: {Case}\n" +
+                "-----------------------------------\n" +
                 $"Cijena svih komponenti: {ComponentsPrice} kn\nCijena usluge sastavljanja: {AssemblyPrice} kn\nUkupna cijena: {TotalPrice} kn";
         }
     }

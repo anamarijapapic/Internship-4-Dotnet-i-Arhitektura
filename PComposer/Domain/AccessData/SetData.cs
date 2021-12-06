@@ -43,5 +43,15 @@ namespace Domain.AccessData
             Domain.Order.TotalComponentsPrice += computer.ComponentsPrice;
             Domain.Order.TotalAssemblyPrice += computer.AssemblyPrice;
         }
+
+        public static void FixWeight(Computer computer)
+        {
+            Domain.Order.TotalWeight -= computer.Weight;
+        }
+
+        public static void AddReceipt(Order order, User user)
+        {
+            Domain.Receipt = new(order, user);
+        }
     }
 }

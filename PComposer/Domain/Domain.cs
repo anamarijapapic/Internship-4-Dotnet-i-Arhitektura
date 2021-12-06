@@ -9,5 +9,6 @@ namespace Domain
         public static User CurrentUser;
         public static Computer Computer;
         public static Order Order = new();
+        public static Receipt Receipt;
     }
 }
