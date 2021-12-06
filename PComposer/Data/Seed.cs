@@ -54,5 +54,15 @@ namespace Data
                 weight: 0.5F,
                 price: 781.22F)
         };
+
+        private static readonly Random randomNumber = new();
+
+        public static Dictionary<string, int> PromoCodes = new()
+        {
+            { "INTERNSHIP", randomNumber.Next(1, 100) },
+            { "DUMP202122", randomNumber.Next(1, 100) },
+            { "PCOMPOSER1", randomNumber.Next(1, 100) },
+            { "POPUST2021", randomNumber.Next(1, 100) }
+        };
     }
 }

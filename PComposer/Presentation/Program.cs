@@ -51,7 +51,7 @@ namespace Presentation
                         AssembleComputer();
                     } while (Helpers.InputHelpers.AssembleNewComputer());
                     ChooseShipmentMethod();
-                    // ChooseDiscount();
+                    ChooseDiscount();
                     ConfirmOrderOrAssembleNew();
                     break;
                 case MainMenuOptions.ShowOrderHistory:
@@ -96,6 +96,25 @@ namespace Presentation
             Domain.AccessData.SetData.AddComputerToOrder(Domain.Domain.Computer);
 
             Console.WriteLine("\nHvala! Sve komponente za sastavljanje ovog racunala su zabiljezene.");
+
+            Helpers.ConsolePrintHelpers.PrintContinue();
+        }
+
+        static void ChooseDiscount()
+        {
+            Helpers.ConsolePrintHelpers.PrintDiscountSubmenu();
+
+            var userChoice = (SubmenuDiscountOptions)Helpers.InputHelpers.InputNumberChoice(0, 2);
+
+            switch (userChoice)
+            {
+                case SubmenuDiscountOptions.Loyalty:
+                    break;
+                case SubmenuDiscountOptions.Quantity:
+                    break;
+                case SubmenuDiscountOptions.PromoCode:
+                    break;
+            }
 
             Helpers.ConsolePrintHelpers.PrintContinue();
         }

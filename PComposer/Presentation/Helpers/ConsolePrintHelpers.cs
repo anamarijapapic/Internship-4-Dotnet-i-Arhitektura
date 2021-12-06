@@ -87,5 +87,16 @@ namespace Presentation.Helpers
                             + "| Prikaz mojih proslih narudzbi |\n"
                             + "+-------------------------------+");
         }
+
+        public static void PrintDiscountSubmenu()
+        {
+            Console.Clear();
+
+            Console.WriteLine("+---- Odaberite moguci popust ----+\n"
+                            + "| 0 - Popust za vjerno clanstvo   |\n"
+                            + "| 1 - Popust na kolicinu          |\n"
+                            + "| 2 - Popust unosom koda          |\n"
+                            + "+---------------------------------+");
+        }
     }
 }
